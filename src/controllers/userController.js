@@ -3,8 +3,6 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const signup = async (req, res) => {
-    console.log("bp1");
-
     // check existing user
     const { username, email, password } = req.body;
 
@@ -76,11 +74,13 @@ const signin = async (req, res) => {
             process.env.TOKEN_SECRET_KEY
         );
 
-        res.status(201).json({
-            status: "success",
-            user: existingUser,
-            token: token,
-        });
+        // save token as cookie with 7 day expiry
+        const exDate = new Date();
+        exDate.setDate(exDate.getDate() + 7);
+
+        res.cookie("token", token, { maxAge: 7 * 24 * 60 * 60 * 1000 });
+
+        res.redirect("/dashboard");
     } catch (error) {
         console.log(error);
         res.status(500).json({
