@@ -6,6 +6,8 @@ const cookieParser = require("cookie-parser");
 
 const dashboardRouter = require("./routes/dashboardRouter");
 const userRouter = require("./routes/userRouter");
+const indexRouter = require("./routes/indexRouter");
+const startRouter = require("./routes/startRouter");
 
 const app = express();
 
@@ -16,15 +18,13 @@ app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(cookieParser());
+app.use(express.static(__dirname + "/public"));
 
 // Routes
 app.use("/users", userRouter);
 app.use("/dashboard", dashboardRouter);
-
-app.get("/", (req, res) => {
-    console.log("ass");
-    res.status(200).json({ message: "hello from server" });
-});
+app.use("/", indexRouter);
+app.use("/start", startRouter);
 
 // DB Connection
 const DB_STRING = process.env.DB_CONNECTION_STRING.replace(

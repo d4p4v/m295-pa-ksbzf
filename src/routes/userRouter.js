@@ -1,5 +1,4 @@
 const express = require("express");
-const { showDashboard } = require("../controllers/dashboardController");
 const { signup, signin } = require("../controllers/userController");
 
 const userRouter = express.Router();
