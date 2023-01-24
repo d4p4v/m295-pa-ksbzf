@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -8,14 +8,15 @@
     --c-bg: #17181c;
     --c-bg-2: #24252a;
     --c-accent: #7a41ff;
+    --c-accent-d: #6b38e4;
     --c-text-l: #dfe1e8;
     --c-text-d: #8f929c;
 }
 
-* {
-    @apply p-0 m-0 box-border;
-}
-
 body {
     @apply bg-[var(--c-bg)] text-[var(--c-text-l)] font-['Poppins'];
+}
+
+button[type="submit"] {
+    @apply bg-[var(--c-accent)] hover:brightness-90 active:brightness-110 filter transition text-[var(--c-text-l)] px-5 py-3 rounded-md text-sm shadow-xl;
 }

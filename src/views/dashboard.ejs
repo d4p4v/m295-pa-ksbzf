@@ -1,2 +1,8 @@
 <h1>Dashboard</h1>
 <p>Welcome, your email is: <%= email %></p>
+<% if (isTeacher) { %>
+<p>You're a teacher!</p>
+<% } %>
+<form action="/users/signout" method="post">
+    <button type="submit">Sign out</button>
+</form>

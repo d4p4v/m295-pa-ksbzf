@@ -1,7 +1,53 @@
-<%- include('partials/header') %>
+<%- include('partials/header', {
+    title: "KSBZF | Start",
+    css: "css/output.css"
+}) %>
 
-<div class="h-screen w-screen flex justify-center items-center">
-    
+<%- include ('partials/navigation', {
+    links: [
+        {
+            text: "Sign up",
+            href: "/users/signup"
+        },
+        {
+            text: "Sign in",
+            href: "/users/signin"
+        }
+    ]
+}) %>
+
+<div class="bg-[url(/img/summary.jpg)] min-h-[30rem] bg-fixed bg-center bg-no-repeat bg-cover">
+    <div class="w-full min-h-[30rem] bg-[#00000093] flex justify-center items-center">
+        <a href="/users/signup" class="bg-[var(--c-accent)] hover:brightness-90 active:brightness-110 filter transition text-[var(--c-text-l)] px-5 py-3 rounded-xl shadow-xl">Get started</a>
+    </div>
+</div>
+
+
+<div class="px-12 py-16 mb-6">
+    <p class="text-[2.5rem]">
+        <span class="text-[var(--c-accent)] text-[3rem]">Welcome</span> to KSBZF
+    </p>
+    <p class="text-[var(--c-text-d)]">
+        Your place for quick learning with assistance of your classmates and teachers!
+    </p>
+</div>
+
+<div class="px-12 py-16 mb-6 text-right bg-[var(--c-bg-2)]">
+    <p class="text-[2.5rem]">
+        Our <span class="text-[var(--c-accent)] text-[3rem]">purpose</span>
+    </p>
+    <p class="text-[var(--c-text-d)]">
+        We strive to make the process of summarizing topics as fun and collaborative as possible!
+    </p>
+</div>
+
+<div class="px-12 py-16 mb-6">
+    <p class="text-[2.5rem]">
+        <span class="text-[var(--c-accent)] text-[3rem]">How</span> it works
+    </p>
+    <p class="text-[var(--c-text-d)]">
+        Your teacher introduces you to a new topic, simultaneously allowing you to create summaries and share them with your fellow classmates!
+    </p>
 </div>
 
 <%- include('partials/footer') %>

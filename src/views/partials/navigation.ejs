@@ -1,0 +1,14 @@
+<div class="w-full z-[100] flex bg-[var(--c-accent)]">
+    <div class="flex pl-4 items-center">
+        <img src="https://img.icons8.com/ios-glyphs/30/null/repository.png" class="filter invert w-[30px] h-[30px]"/>
+        <p class="text-[var(--c-text-l)] text-2xl p-4 font-extralight">KSBZF</p>    
+    </div>
+    <div class="flex-1"></div>
+    <div class="flex items-center">
+        <% links.forEach(link => { %>
+        <a class="h-full flex px-4 items-center hover:bg-[var(--c-accent-d)]" href="<%- link.href %>" >
+            <%- link.text %>
+        </a>
+        <% }) %>
+    </div>
+</div>

@@ -12,7 +12,7 @@ const startRouter = require("./routes/startRouter");
 const app = express();
 
 // Setup
-app.set("views", `${__dirname}/views`);
+app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
 
 app.use(express.json());
@@ -26,7 +26,7 @@ app.use("/dashboard", dashboardRouter);
 app.use("/", indexRouter);
 app.use("/start", startRouter);
 
-// DB Connection
+// DB Connection & Server Start
 const DB_STRING = process.env.DB_CONNECTION_STRING.replace(
     "<username>",
     process.env.DB_USERNAME1
