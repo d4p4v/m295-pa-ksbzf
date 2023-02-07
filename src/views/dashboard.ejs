@@ -8,11 +8,11 @@
     <% if (user.isTeacher) { %>
     <!-- Navigation -->
     <div class="flex flex-col w-52 h-full bg-[var(--c-bg-2)] py-2">
-      <p class="flex gap-3 items-center w-full cursor-pointer p-4 hover:bg-[var(--c-accent-d)]" onclick="showCreateTopic"><i class="fa-solid fa-square-plus"></i>New Topic</p>
-      <p class="flex gap-3 items-center w-full cursor-pointer p-4 hover:bg-[var(--c-accent-d)]" onclick="showViewStudents"><i class="fa-solid fa-comments"></i>View Topics</p>
-      <p class="flex gap-3 items-center w-full cursor-pointer p-4 hover:bg-[var(--c-accent-d)]" onclick="showViewTopics"><i class="fa-solid fa-people-robbery"></i>View Students</p>
+      <p id="create-topic-view-btn" class="flex gap-3 items-center w-full cursor-pointer p-4 hover:bg-[var(--c-accent-d)]"><i class="fa-solid fa-square-plus"></i>New Topic</p>
+      <p id="view-topics-view-btn" class="flex gap-3 items-center w-full cursor-pointer p-4 hover:bg-[var(--c-accent-d)]"><i class="fa-solid fa-comments"></i>View Topics</p>
+      <p class="flex gap-3 items-center w-full cursor-pointer p-4 hover:bg-[var(--c-accent-d)]"><i class="fa-solid fa-people-robbery"></i>View Students</p>
       <div class="flex-1"></div>
-      <p class="flex gap-3 items-center w-full cursor-pointer p-4 hover:bg-[var(--c-accent-d)]" onclick="showAccountSettings"><i class="fa-solid fa-gear"></i>Account Settings</p>
+      <p class="flex gap-3 items-center w-full cursor-pointer p-4 hover:bg-[var(--c-accent-d)]"><i class="fa-solid fa-gear"></i>Account Settings</p>
     </div>
 
     <!-- Views -->
@@ -29,6 +29,26 @@
             <button type="submit" class="mt-auto">Create</button>
           </form>
         </div>
+
+        <div id="view-topics-view" class="hidden h-full flex-col">
+          <div class="flex h-full flex-col ">
+            <p class=" text-3xl font-semibold mb-4">All your created topics</p>
+            <% if (topics.length > 0) { %>
+            <p class="mb-4 font-light text-xl">Click one to delete it.</p>
+            <% } else { %>
+            <p class="mb-4 font-light text-xl">... but sadly you have none.</p>
+            <% } %>
+
+            <div class="flex gap-2 flex-wrap">
+              <% topics.forEach(topic => { %>
+              <form action="/dashboard/delete-topic" method="post">
+                <input type="text" name="id" id="id" value="<%- topic.name %> " class="hidden">
+                <button type="submit" class="p-2 w-max text-xs bg-[var(--c-accent)] mt-1 rounded"> <%- topic.name %> </button>
+              </form>
+              <% }) %>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <% } %>
@@ -37,10 +57,19 @@
 
 <script>
   const createTopicView = document.getElementById("create-topic-view")
+  const viewTopicsView = document.getElementById("view-topics-view")
+
+  const createTopicViewBtn = document.getElementById("create-topic-view-btn")
+  const viewTopicsViewBtn = document.getElementById("view-topics-view-btn")
 
   const showCreateTopic = () => {
     createTopicView.classList.remove('hidden')
+    createTopicView.classList.add('flex')
+
+    viewTopicsView.classList.add('hidden')
+    viewTopicsView.classList.remove('flex')
   }
+  createTopicViewBtn.addEventListener('click', showCreateTopic)
 
   const showAccountSettings = () => {
     createTopicView.classList.add('hidden')
@@ -51,6 +80,12 @@
   }
 
   const showViewTopics = () => {
+    console.log("bruh");
     createTopicView.classList.add('hidden')
+    createTopicView.classList.remove('flex')
+
+    viewTopicsView.classList.remove('hidden')
+    viewTopicsView.classList.add('flex')
   }
+  viewTopicsViewBtn.addEventListener('click', showViewTopics)
 </script>
