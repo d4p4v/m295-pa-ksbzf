@@ -14,6 +14,7 @@ const app = express();
 // Setup
 app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
+mongoose.set("strictQuery", false);
 
 app.use(express.json());
 app.use(express.urlencoded());
@@ -28,13 +29,15 @@ app.use("/start", startRouter);
 
 // DB Connection & Server Start
 const DB_STRING = process.env.DB_CONNECTION_STRING.replace(
-    "<username>",
-    process.env.DB_USERNAME1
+  "<username>",
+  process.env.DB_USERNAME1
 ).replace("<password>", process.env.DB_PASSWORD1);
 
 mongoose
-    .connect(DB_STRING)
-    .then(() => {
-        app.listen(5000, () => console.log("Server started on port 5000"));
-    })
-    .catch((err) => console.log(err));
+  .connect(DB_STRING)
+  .then(() => {
+    app.listen(process.env.PORT, () =>
+      console.log("Server started on port " + process.env.PORT)
+    );
+  })
+  .catch((err) => console.log(err));

@@ -1,8 +1,56 @@
-<h1>Dashboard</h1>
-<p>Welcome, your email is: <%= email %></p>
-<% if (isTeacher) { %>
-<p>You're a teacher!</p>
-<% } %>
-<form action="/users/signout" method="post">
-    <button type="submit">Sign out</button>
-</form>
+<%- include('partials/header', { title: "KSBZF | Dashboard" , css: "../css/output.css" }) %>
+
+<div class="flex flex-col h-screen">
+  <%- include ('partials/navigation', { links: [ ] }) %>
+
+  <div class="w-screen flex-1 flex">
+
+    <% if (user.isTeacher) { %>
+    <!-- Navigation -->
+    <div class="flex flex-col w-52 h-full bg-[var(--c-bg-2)] py-2">
+      <p class="flex gap-3 items-center w-full cursor-pointer p-4 hover:bg-[var(--c-accent-d)]" onclick="showCreateTopic"><i class="fa-solid fa-square-plus"></i>New Topic</p>
+      <p class="flex gap-3 items-center w-full cursor-pointer p-4 hover:bg-[var(--c-accent-d)]" onclick="showViewStudents"><i class="fa-solid fa-comments"></i>View Topics</p>
+      <p class="flex gap-3 items-center w-full cursor-pointer p-4 hover:bg-[var(--c-accent-d)]" onclick="showViewTopics"><i class="fa-solid fa-people-robbery"></i>View Students</p>
+      <div class="flex-1"></div>
+      <p class="flex gap-3 items-center w-full cursor-pointer p-4 hover:bg-[var(--c-accent-d)]" onclick="showAccountSettings"><i class="fa-solid fa-gear"></i>Account Settings</p>
+    </div>
+
+    <!-- Views -->
+    <div class="flex-1 p-6">
+      <div class="w-full h-full bg-[var(--c-bg-2)] p-4">
+        <div id="create-topic-view" class="h-full flex flex-col">
+          <p class=" text-3xl font-semibold mb-4">Create a topic</p>
+          <form class="flex flex-col h-full" action="/dashboard/new-topic" method="post">
+            <label for="topic-name" class="mb-1 text-[var(--c-text-d)] text-sm">Topic Name</label>
+            <input type="text" name="topic-name" id="topic-name" class="bg-[var(--c-bg)] focus:outline-[2px] outline-none focus:outline-[var(--c-accent)] outline-[0px] transition-all text-[var(--c-text-d)] rounded-md text-sm px-4 py-2">
+            <% if (id !== "0") { %>
+            <p class="p-2 text-xs bg-[var(--c-accent)] mt-2 rounded">Topic created successfully.<br><%- id %> </p>
+            <% } %>
+            <button type="submit" class="mt-auto">Create</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>
+
+<script>
+  const createTopicView = document.getElementById("create-topic-view")
+
+  const showCreateTopic = () => {
+    createTopicView.classList.remove('hidden')
+  }
+
+  const showAccountSettings = () => {
+    createTopicView.classList.add('hidden')
+  }
+
+  const showViewStudents = () => {
+    createTopicView.classList.add('hidden')
+  }
+
+  const showViewTopics = () => {
+    createTopicView.classList.add('hidden')
+  }
+</script>

@@ -1,27 +1,33 @@
 <%- include('partials/header', { title: "KSBZF | Sign In" , css: "../css/output.css" }) %>
 
-    <div class="h-screen w-screen flex  justify-center flex-col items-center">
-        <div class="mb-5 text-center">
-            <p class="text-[var(--c-accent)] text-3xl">KSBZF</p>
-            <p class="text-[var(--c-text-d)]">Start collaborating</p>
+  <div class="h-screen w-screen flex justify-center flex-col items-center">
+    <div class="mb-5 text-center">
+      <p class="text-[var(--c-accent)] text-3xl">KSBZF</p>
+      <p class="text-[var(--c-text-d)]">Start collaborating</p>
+      <% if (message !="" ) { %>
+        <div class="flex justify-center items-center">
+          <p class="text-[var(--c-text-l)] px-2 py-1 text-xs w-max bg-pink-600 mt-4 rounded-full shadow-md">
+            <%- message %>
+          </p>
         </div>
-        <div class="bg-[var(--c-bg-2)] rounded-lg w-[25rem] h-min p-10">
-            <form action="/users/signin" method="post" class="flex flex-col h-full">
-
-                <label class="text-sm mb-2" for="email">Email</label>
-                <input required
-                    class="mb-4 bg-[var(--c-bg)] focus:outline-[3px] outline-none focus:outline-[var(--c-accent)] outline-[0px] transition-all text-[var(--c-text-d)] rounded-md text-sm px-4 py-2"
-                    type="email" name="email" id="email">
-
-                <label class="text-sm mb-2" for="password">Password</label>
-                <input required
-                    class="mb-4 bg-[var(--c-bg)] focus:outline-[3px] outline-none focus:outline-[var(--c-accent)] outline-[0px] transition-all text-[var(--c-text-d)] rounded-md text-sm px-4 py-2"
-                    type="password" name="password" id="password">
-
-
-                <div class="flex-1 mt-5 flex justify-center items-end">
-                    <button type="submit" class="w-full">Sign in</button>
-                </div>
-            </form>
-        </div><a href="/start" class="mt-3 text-sm text-[var(--c-text-d)] underline">Go to start</a>
+        <% } %>
     </div>
+    <div class="bg-[var(--c-bg-2)] rounded-lg w-[25rem] h-min p-10">
+      <form action="/users/signin" method="post" class="flex flex-col h-full">
+        <label class="text-sm mb-2" for="email">Email</label>
+        <input required
+          class="mb-4 bg-[var(--c-bg)] focus:outline-[3px] outline-none focus:outline-[var(--c-accent)] outline-[0px] transition-all text-[var(--c-text-d)] rounded-md text-sm px-4 py-2"
+          type="email" name="email" id="email" />
+
+        <label class="text-sm mb-2" for="password">Password</label>
+        <input required
+          class="mb-4 bg-[var(--c-bg)] focus:outline-[3px] outline-none focus:outline-[var(--c-accent)] outline-[0px] transition-all text-[var(--c-text-d)] rounded-md text-sm px-4 py-2"
+          type="password" name="password" id="password" />
+
+        <div class="flex-1 mt-5 flex justify-center items-end">
+          <button type="submit" class="w-full">Sign in</button>
+        </div>
+      </form>
+    </div>
+    <a href="/start" class="mt-3 text-sm text-[var(--c-text-d)] underline">Go to start</a>
+  </div>
